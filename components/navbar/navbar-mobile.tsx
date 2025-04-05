@@ -26,19 +26,7 @@ export const NavbarMobile = () => {
                 href="#1"
                 className={buttonVariants({ variant: "link" })}
               >
-                Item 1
-              </NavigationMenuLink>
-              <NavigationMenuLink
-                href="#2"
-                className={buttonVariants({ variant: "link" })}
-              >
-                Item 2
-              </NavigationMenuLink>
-              <NavigationMenuLink
-                href="#3"
-                className={buttonVariants({ variant: "link" })}
-              >
-                Item 3
+                Loserboard
               </NavigationMenuLink>
               <div className="flex flex-col mb-0.5">
                 <NavbarUserLinks />

@@ -13,22 +13,16 @@ export const NavBar: FC = () => {
           <div className="flex items-center">
             <Link href="/" className="hover:opacity-80 transition-opacity">
               <div className="flex items-center">
-                <FishIcon className="w-8 h-8 mr-2 inline" />{" "}
+                {/* INSERT LOGO HERE */}
                 <span className="text-xl font-semibold tracking-tighter text-slate-800 mr-6">
-                  Venefish
+                  lock0ut
                 </span>
               </div>
             </Link>
             <div className="hidden md:flex justify-between grow">
               <div>
                 <Link href="#1" className={buttonVariants({ variant: "link" })}>
-                  Item 1
-                </Link>
-                <Link href="#2" className={buttonVariants({ variant: "link" })}>
-                  Item 2
-                </Link>
-                <Link href="#3" className={buttonVariants({ variant: "link" })}>
-                  Item 3
+                  Loserboard
                 </Link>
               </div>
               <div className="flex items-center space-x-4">
