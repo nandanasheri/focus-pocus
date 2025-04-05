@@ -44,7 +44,7 @@ export const ProviderLoginButtons: FC<Props> = ({ onSignIn }) => {
             title: "Oops!",
             description: "Provider not configured, yet.",
           });
-          // await doProviderSignIn(provider);
+          await doProviderSignIn(provider);
         }}
       >
         <svg
@@ -67,7 +67,7 @@ export const ProviderLoginButtons: FC<Props> = ({ onSignIn }) => {
             title: "Oops!",
             description: "Provider not configured, yet.",
           });
-          // await doProviderSignIn(provider);
+          await doProviderSignIn(provider);
         }}
       >
         <GithubIcon className="w-4 h-4 mr-2" />
