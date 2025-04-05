@@ -15,7 +15,7 @@ import { toast } from "@/components/ui/use-toast";
 import { getAuth, signOut } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import { useUser } from "reactfire";
-
+import Link from "next/link";
 export function UserNav() {
   const { data } = useUser();
   const router = useRouter();
@@ -27,6 +27,13 @@ export function UserNav() {
     });
     router.replace("/");
   };
+  const profilePopup = () => {
+    toast({
+      title: "Oops!",
+      description: "Profile popup not implemented, yet.",
+    });
+  };
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -57,7 +64,9 @@ export function UserNav() {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem>Profile</DropdownMenuItem>
+          <Link href="/profile" >
+          <DropdownMenuItem >Profile</DropdownMenuItem>
+                    </Link>
           <DropdownMenuItem>Billing</DropdownMenuItem>
           <DropdownMenuItem>Settings</DropdownMenuItem>
           <DropdownMenuItem>New Team</DropdownMenuItem>
