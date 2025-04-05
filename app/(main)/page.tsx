@@ -8,14 +8,15 @@ import {
 } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import Features from "./features";
 import React from "react";
 
 export default function Home() {
   return (
     <>
-      <div className="grow flex flex-col items-center justify-evenly">
-        <section className="space-y-6">
-          <div className="container flex flex-col items-center gap-8 text-center">
+      <div className="grow flex flex-col items-center justify-evenly h-screen">
+        <section className="space-y-5">
+          <div className="container flex flex-col items-center gap-7 text-center">
             <h1 className="max-w-4xl font-heading font-semibold text-5xl text-accentblue sm:text-6xl md:text-6xl lg:text-8xl tracking-tighter">
             Lock In Focus, Lock Out Distractions.
             </h1>
@@ -30,6 +31,7 @@ export default function Home() {
           </div>
         </section>
       </div>
+      <Features/>
     </>
   );
 }

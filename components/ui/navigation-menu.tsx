@@ -24,8 +24,7 @@ const NavigationMenu = React.forwardRef<
 NavigationMenu.displayName = NavigationMenuPrimitive.Root.displayName
 
 const NavigationMenuList = React.forwardRef<
-  React.ComponentRef<typeof NavigationMenuPrimitive.List>,
-  React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.List>
+HTMLUListElement,  React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.List>
 >(({ className, ...props }, ref) => (
   <NavigationMenuPrimitive.List
     ref={ref}
