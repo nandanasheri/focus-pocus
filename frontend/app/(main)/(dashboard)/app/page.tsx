@@ -16,6 +16,7 @@ const ApplicationPage = () => {
   const [time, setTime] = useState([]);
   const [topDomains, setTopDomains] = useState([])
   const [distractors, setDistractors] = useState(0.0)
+  const [sources, setSources] = useState([])
 
   const fetchData = async () => {
     try {
@@ -36,6 +37,7 @@ const ApplicationPage = () => {
       setTopDomains(data['traffic'].sort((a, b) => b - a).slice(0,3))
       setDistractors(data['number'])
       setTime(data['time'])
+      setSources(data['sources'])
     } catch (error) {}
   };
 
