@@ -25,34 +25,47 @@ const chartColors = [
   "hsl(var(--chart-5))",
 ]
 
-const chartData = [
-  { domain: "google.com", packets: 846 },
-  { domain: "discord.com", packets: 158 },
-  { domain: "github.com", packets: 179 },
-  { domain: "chat.ai", packets: 93 },
-  { domain: "Other", packets: 90 },
-]
+type ChartDataEntry = {
+  domain: string;
+  packets: number;
+};
 
-const colorMap = chartData.reduce((map, entry, index) => {
-  map[entry.domain] = chartColors[index]
-  return map
-}, {})
+type RawTrafficEntry = [string, number];
+
+type Props = {
+  traffic: RawTrafficEntry[];
+};
 
 
-const chartConfig = chartData.reduce((config, entry) => {
-  const key = entry.domain.toLowerCase().replace(/\./g, "") 
-  config[key] = {
-    label: entry.domain,
-    color: colorMap[entry.domain] || "hsl(var(--chart-default))",
-  }
-  return config
-}, {})
+export function PieChartAddIn({ traffic }: Props) {
+  console.log(traffic)
+  var chartData: ChartDataEntry[] = traffic?.map(([domain, packets]) => ({
+    domain,
+    packets,
+  })) ?? [];
 
-const trendingDomain = chartData.reduce((prev, current) =>
-  prev.packets > current.packets ? prev : current
-)
+  chartData = chartData.slice(0, 5)
 
-export function PieChartAddIn() {
+  const colorMap = chartData.reduce((map, entry, index) => {
+    map[entry.domain] = chartColors[index]
+    return map
+  }, {})
+  
+  
+  const chartConfig = chartData.reduce((config, entry) => {
+    const key = entry.domain.toLowerCase().replace(/\./g, "") 
+    config[key] = {
+      label: entry.domain,
+      color: colorMap[entry.domain] || "hsl(var(--chart-default))",
+    }
+    return config
+  }, {})
+  
+  const trendingDomain = chartData.reduce((prev, current) => 
+    prev.packets > current.packets ? prev : current, 
+    { packets: -Infinity } // Providing an initial value
+  );
+
   return (
     <Card className="flex flex-col col-span-4">
       <CardHeader className="items-center pb-0">

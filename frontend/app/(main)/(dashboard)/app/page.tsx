@@ -14,6 +14,7 @@ import {
 const ApplicationPage = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [traffic, setTraffic] = useState(null);  
   const [time, setTime] = useState([]);
 
 
@@ -34,6 +35,7 @@ const ApplicationPage = () => {
       console.log(data)
       setData(data); // Update the state with the fetched data
       setLoading(false); // Set loading to false
+      setTraffic(data["Traffic"]);
       setTime(data['time'])
     } catch (error) {
       setLoading(false); // Set loading to false
@@ -59,7 +61,11 @@ const ApplicationPage = () => {
           <TopBarChart/>
         </div>
         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-8">
-          <PieChartAddIn/>
+        {traffic ? (
+            <PieChartAddIn traffic={traffic} />
+          ) : (
+            <p>Loading...</p>
+          )}
           <div className="flex-col  space-y-6 col-span-4 ">
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -86,7 +92,7 @@ const ApplicationPage = () => {
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-3xl font-medium">
-                  Percentage of distarcting websites visited
+                  Percentage of distracting websites visited
                 </CardTitle>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
