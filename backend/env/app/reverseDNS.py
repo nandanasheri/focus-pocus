@@ -4,7 +4,7 @@ import time
 
 def isvalid_domain(domain):
     RANDOM_DOMAINS = set(['.net', 'aws', 'static', 'cloudflare'])
-    if any(domain in each for each in RANDOM_DOMAINS):
+    if any(domain.endswith(suffix) for suffix in RANDOM_DOMAINS):
         return False
     return True
 
