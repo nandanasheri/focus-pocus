@@ -5,8 +5,8 @@ import time
 def isvalid_domain(domain):
     RANDOM_DOMAINS = set(['.net', 'aws', 'static', 'cloudflare'])
     if any(domain in each for each in RANDOM_DOMAINS):
-        return True
-    return False
+        return False
+    return True
 
 def get_top_destination_ips_with_empty_destination_name():
     conn = sqlite3.connect('database.db')
