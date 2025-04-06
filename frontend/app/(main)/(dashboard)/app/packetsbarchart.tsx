@@ -61,10 +61,10 @@ export function PacketsBarChart() {
   }, [] as { time: string; [key: string]: number }[])
 
   const chartConfig = {
-    domains: maxDomains.reduce((acc, domain) => {
+    domains: maxDomains.reduce((acc, domain, index) => {
       acc[domain] = {
         label: domain,
-        color: `hsl(${Math.random() * 360}, 100%, 70%)`,
+        color: chartColors[index % chartColors.length], 
       }
       return acc
     }, {} as Record<string, { label: string; color: string }>)
@@ -97,7 +97,21 @@ export function PacketsBarChart() {
               tickFormatter={(value) => value}
             />
             <ChartTooltip content={<ChartTooltipContent hideLabel />} />
-            <ChartLegend content={<ChartLegendContent />} />
+            <ChartLegend>
+              {maxDomains.map((domain) => (
+                <div key={domain} style={{ display: "flex", alignItems: "center", margin: "0 10px" }}>
+                  <div
+                    style={{
+                      width: 20,
+                      height: 20,
+                      backgroundColor: chartConfig.domains[domain].color,
+                      marginRight: "8px",
+                    }}
+                  />
+                  <span>{chartConfig.domains[domain].label}</span>
+                </div>
+              ))}
+            </ChartLegend>
             {maxDomains.map((domain) => (
               <Bar
                 key={domain}
