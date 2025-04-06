@@ -6,6 +6,8 @@ import {
   GithubAuthProvider,
   GoogleAuthProvider,
   signInWithPopup,
+  UserCredential,
+  getAdditionalUserInfo
 } from "firebase/auth";
 import { GithubIcon } from "lucide-react";
 import { FC, useState } from "react";
@@ -23,7 +25,17 @@ export const ProviderLoginButtons: FC<Props> = ({ onSignIn }) => {
     try {
       setIsLoading(true);
       await signInWithPopup(auth, provider);
-      // create user in your database here
+      const result: UserCredential = await signInWithPopup(auth, provider);
+      const additionalInfo = getAdditionalUserInfo(result);
+        // create user in your database here
+        // The user is signed in successfully.
+      const user = result.user;
+      if (additionalInfo?.isNewUser) {
+        console.log("new User")
+      }
+      else {
+        console.log("Not new user")
+      }
       toast({ title: "Signed in!" });
       onSignIn?.();
     } catch (err: any) {
