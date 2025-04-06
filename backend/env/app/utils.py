@@ -28,23 +28,30 @@ def get_db_connection():
 
 def distracting_sites_count():
     conn = get_db_connection()
-    rows = conn.execute("SELECT hostname FROM traffic").fetchall()
+    rows = conn.execute("SELECT destination_name FROM traffic").fetchall()
     hostnames = [row[0] for row in rows]
     distractor_packets = 0
     for hostname in hostnames:
           if any(distractor in hostname for distractor in DISTRACTORS):
               distractor_packets += 1
-    return distractor_packets
+    return distractor_packets/len(hostnames) * 100
 
 def get_overall_traffic() -> Any:
     conn = get_db_connection()
-    rows = conn.execute("SELECT COUNT(id), hostname from traffic GROUP BY hostname ORDER BY COUNT(id) DESC").fetchall()
+    rows = conn.execute("SELECT COUNT(id), destination_name from traffic GROUP BY destination_name ORDER BY COUNT(id) DESC").fetchall()
     packets_dict = []
     for row in rows:
         packets_dict.append((row[1], row[0]))
 
     return packets_dict
 
+def get_sourceip_packets() -> Any:
+    conn = get_db_connection()
+    rows = conn.execute("SELECT src_ip, COUNT(id) from traffic GROUP BY src_ip")
+    src_data = []
+    for row in rows:
+        src_data.append((row[0], row[1]))
+    return src_data
 '''
 take last 10 minutes
 find top 3 most visited domains
@@ -55,7 +62,7 @@ for each
 '''
 def json_to_time_data() -> Any:
     conn = get_db_connection()
-    rows = conn.execute("SELECT time, hostname FROM traffic WHERE time >= datetime((SELECT MAX(time) FROM traffic), '-10 minutes') ORDER BY time;").fetchall()
+    rows = conn.execute("SELECT time, destination_name FROM traffic WHERE time >= datetime((SELECT MAX(time) FROM traffic), '-10 minutes') ORDER BY time;").fetchall()
   
     # Initialize a dictionary to hold time -> hostname counts
     time_data = defaultdict(lambda: defaultdict(int))
