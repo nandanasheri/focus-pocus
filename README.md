@@ -32,8 +32,8 @@ How _little_ control we truly have on Northwestern's wifi. More importantly, we 
 Our project stemmed from the idea of blocking users at a DNS level using WireGuard. we'd like to hopefully take lock0ut to pushing real time alerts as well as actively blocking sites or redirecting them during certain study and hangout sessions true to our idea of being with each other when we spend time today.
 
 ## Credits
-[Netxjs and Firebase Template](https://github.com/enesien/venefish)
-[shad-cn](https://ui.shadcn.com/)
-[Flask](https://flask.palletsprojects.com/en/stable/)
-[Recharts](https://recharts.org/en-US/)
-ChatGPT, Gemini
+- [Netxjs and Firebase Template](https://github.com/enesien/venefish)
+- [shad-cn](https://ui.shadcn.com/)
+- [Flask](https://flask.palletsprojects.com/en/stable/)
+- [Recharts](https://recharts.org/en-US/)
+- ChatGPT, Gemini
