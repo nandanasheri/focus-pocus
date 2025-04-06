@@ -19,6 +19,14 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart"
 
+const chartColors = [
+  "hsl(var(--chart-1))",
+  "hsl(var(--chart-2))",
+  "hsl(var(--chart-3))",
+  "hsl(var(--chart-4))",
+  "hsl(var(--chart-5))",
+]
+
 const chartData = [
   { time: "21:27", domain: "chat.google.com", visits: 27 },
   { time: "21:27", domain: "google.com", visits: 11 },
@@ -30,6 +38,11 @@ const chartData = [
   { time: "21:29", domain: "google.com", visits: 15 },
   { time: "21:29", domain: "chat.com", visits: 3 },
 ]
+
+const colorMap = chartData.reduce((map, entry, index) => {
+  map[entry.domain] = chartColors[index]
+  return map
+}, {})
 
 export function PacketsBarChart() {
   const uniqueDomains = Array.from(new Set(chartData.map((data) => data.domain)))
@@ -48,9 +61,6 @@ export function PacketsBarChart() {
   }, [] as { time: string; [key: string]: number }[])
 
   const chartConfig = {
-    views: {
-      label: "Page Views",
-    },
     domains: maxDomains.reduce((acc, domain) => {
       acc[domain] = {
         label: domain,
@@ -64,7 +74,7 @@ export function PacketsBarChart() {
     <Card className="w-full h-full">
       <CardHeader className="flex flex-col items-stretch space-y-0 border-b p-0 sm:flex-row">
         <div className="flex flex-1 flex-col justify-center gap-1 px-6 py-5 sm:py-6">
-          <CardTitle>Stacked Bar Chart - Time-based Visits</CardTitle>
+          <CardTitle>Time-based Visits</CardTitle>
           <CardDescription>Visits per domain over time</CardDescription>
         </div>
       </CardHeader>
