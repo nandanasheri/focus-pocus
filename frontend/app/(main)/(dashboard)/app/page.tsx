@@ -14,6 +14,8 @@ import {
 const ApplicationPage = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [time, setTime] = useState([]);
+
 
   // Define an async function to fetch data
   const fetchData = async () => {
@@ -32,6 +34,7 @@ const ApplicationPage = () => {
       console.log(data)
       setData(data); // Update the state with the fetched data
       setLoading(false); // Set loading to false
+      setTime(data['time'])
     } catch (error) {
       setLoading(false); // Set loading to false
     }
@@ -40,7 +43,7 @@ const ApplicationPage = () => {
   useEffect(() => {
     fetchData(); // Call the async fetch function when the component mounts
     // Set an interval to call the API every 30 seconds
-    const intervalId = setInterval(fetchData, 30000); // 30000 ms = 30 seconds
+    const intervalId = setInterval(fetchData, 5000); // 30000 ms = 30 seconds
     return () => clearInterval(intervalId);
   }, []); // Empty dependency array means this runs only once when the component mounts
 
@@ -105,7 +108,7 @@ const ApplicationPage = () => {
           </div>
         </div>
         <div>
-          <PacketsBarChart />
+          <PacketsBarChart chartData={time}/>
         </div>
       </div>
     </>

@@ -25,24 +25,23 @@ const chartColors = [
   "hsl(var(--chart-5))",
 ]
 
-const chartData = [
-  { time: "21:27", domain: "chat.google.com", visits: 27 },
-  { time: "21:27", domain: "google.com", visits: 11 },
-  { time: "21:27", domain: "chat.com", visits: 1 },
-  { time: "21:28", domain: "chat.google.com", visits: 40 },
-  { time: "21:28", domain: "google.com", visits: 22 },
-  { time: "21:28", domain: "chat.com", visits: 4 },
-  { time: "21:29", domain: "chat.google.com", visits: 33 },
-  { time: "21:29", domain: "google.com", visits: 15 },
-  { time: "21:29", domain: "chat.com", visits: 3 },
-]
+// const chartData = [
+//   { time: "21:27", domain: "chat.google.com", visits: 27 },
+//   { time: "21:27", domain: "google.com", visits: 11 },
+//   { time: "21:27", domain: "chat.com", visits: 1 },
+//   { time: "21:28", domain: "chat.google.com", visits: 40 },
+//   { time: "21:28", domain: "google.com", visits: 22 },
+//   { time: "21:28", domain: "chat.com", visits: 4 },
+//   { time: "21:29", domain: "chat.google.com", visits: 33 },
+//   { time: "21:29", domain: "google.com", visits: 15 },
+//   { time: "21:29", domain: "chat.com", visits: 3 },
+// ]
 
-const colorMap = chartData.reduce((map, entry, index) => {
-  map[entry.domain] = chartColors[index]
-  return map
-}, {})
 
-export function PacketsBarChart() {
+
+export function PacketsBarChart({ chartData }: { chartData: Array<String> }) {
+
+
   const uniqueDomains = Array.from(new Set(chartData.map((data) => data.domain)))
   const maxDomains = uniqueDomains.slice(0, 5)
 
