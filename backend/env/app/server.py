@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 import sqlite3
 import json
-from utils import json_to_packets_dict, remove_random_domains, json_to_time_data
+from utils import get_overall_traffic, json_to_time_data
 app = Flask(__name__)
 
 def get_db_connection():
@@ -29,26 +29,12 @@ def submit_data():
 
 @app.route('/activity', methods=['GET'])
 def get_activity():
-    conn = get_db_connection()
-    # Fetch the data back from the database
-    rows = conn.execute('SELECT * FROM traffic').fetchall()
-    # print(rows)
-    response = []
-    # Convert the stored BLOB back to a Python list of dictionaries
-    for row in rows:
-        stored_blob = row[1]  # Assuming 'data' is the second column
-        stored_json = stored_blob.decode('utf-8')  # Decode bytes back to string
-        stored_data = json.loads(stored_json)
+    
+    packets = get_overall_traffic()
 
-        response.append(stored_data)
-
-    clean_data = remove_random_domains(response)
-    packets = json_to_packets_dict(clean_data)
-
-    json_to_time_data(clean_data)
-    conn.close()
+    result = json_to_time_data()
     # Return a JSON response
-    return {"Data" : packets}
+    return {"Data" : result}
 
 @app.route('/')
 def hello():
