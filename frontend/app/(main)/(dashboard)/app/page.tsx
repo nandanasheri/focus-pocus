@@ -1,3 +1,5 @@
+// "use client"
+
 import { DemoDashboard } from "@/components/demo-dashboard/demo-dashboard";
 import {
   Card,
@@ -6,6 +8,12 @@ import {
   CardContent,
   CardDescription,
 } from "@/components/ui/card";
+// import {
+//   ChartConfig,
+//   ChartContainer,
+//   ChartTooltip,
+//   ChartTooltipContent,
+// } from "@/components/ui/chart"
 import {
   Table,
   TableBody,
