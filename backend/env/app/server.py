@@ -40,7 +40,7 @@ def get_activity():
     source_ip = get_sourceip_packets()
 
     # Return a JSON response
-    return {"Traffic" : packets, "distractors" : number, "sources" : source_ip, }
+    return {"Traffic" : packets, "distractors" : number, "sources" : source_ip, "time" : time}
 
 @app.route('/')
 def hello():

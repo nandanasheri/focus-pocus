@@ -58,14 +58,14 @@ def get_sourceip_packets() -> Any:
 take last 10 minutes
 find top 3 most visited domains
 for each
-{ time: "21:35", google.com: 385, chatgpt.com: 420 },
- { time: "21:35", google.com: 385, chatgpt.com: 420 },
- { time: "21:35", google.com: 385, chatgpt.com: 420 },
+{ date: "21:35", google.com: 385, chatgpt.com: 420 },
+{ date: "21:35", google.com: 385, chatgpt.com: 420 },
+{ date: "21:35", google.com: 385, chatgpt.com: 420 },
 '''
 def json_to_time_data():
     conn = get_db_connection()
     output = []
-    for i in range(0,10):
+    for i in range(0,60):
         rows = conn.execute(f"""SELECT MIN(time) as first_seen, destination_ip, destination_name, COUNT(*) as count
                                 FROM traffic
                                 WHERE time >= (strftime('%s', 'now') - {60 * (i+1)}) AND time <= (strftime('%s', 'now') - {60 * i})
@@ -75,10 +75,10 @@ def json_to_time_data():
         for (first_seen, destination_ip, destination_name, count) in rows:
             first_time = datetime.fromtimestamp(first_seen).strftime('%H:%M')
             output.append({
-                "date": first_time,
-                destination_ip if destination_name == '' else  destination_name: count,
+                "time": first_time,
+                "domain" : destination_ip if destination_name == '' else  destination_name,
+                "visits": count,
             })
-        print(output)
 
     return output
 

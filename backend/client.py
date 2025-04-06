@@ -12,7 +12,7 @@ API_URL = "http://127.0.0.1:5000/pcap"
 
 # Configurable parameters for batching
 BATCH_SIZE = 300  # Number of packets in each batch
-BATCH_INTERVAL = 10  # Maximum time interval in seconds for each batch
+BATCH_INTERVAL = 5  # Maximum time interval in seconds for each batch
 
 # To hold the batch of packets
 packet_batch = deque()
