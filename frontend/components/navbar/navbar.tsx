@@ -1,7 +1,5 @@
 import { NavbarMobile } from "@/components/navbar/navbar-mobile";
-import { NavbarUserLinks } from "@/components/navbar/navbar-user-links";
 import { buttonVariants } from "@/components/ui/button";
-import { FishIcon, ScanTextIcon } from "lucide-react";
 import Link from "next/link";
 import { FC } from "react";
 
@@ -20,9 +18,9 @@ export const NavBar: FC = () => {
             </Link>
             <div className="hidden md:flex justify-between grow">
               <div></div>
-              <div className="flex items-center space-x-4">
-                <NavbarUserLinks />
-              </div>
+              <Link href="/app" className={buttonVariants()}>
+                Dashboard
+              </Link>
             </div>
             <div className="grow md:hidden flex justify-end">
               <NavbarMobile />
