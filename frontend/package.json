@@ -25,6 +25,7 @@
     "@radix-ui/react-toast": "^1.1.5",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
+    "date-fns": "^4.1.0",
     "encoding": "^0.1.13",
     "firebase": "^9.23.0",
     "lucide-react": "^0.284.0",
@@ -33,6 +34,7 @@
     "react-dom": "latest",
     "react-hook-form": "^7.55.0",
     "reactfire": "^4.2.3",
+    "recharts": "^2.15.2",
     "tailwind-merge": "^1.14.0",
     "tailwindcss-animate": "^1.0.7",
     "zod": "^3.24.2"
@@ -46,5 +48,8 @@
     "postcss": "latest",
     "tailwindcss": "latest",
     "typescript": "latest"
+  },
+  "overrides": {
+    "react-is": "^19.0.0-rc-69d4b800-20241021"
   }
 }
