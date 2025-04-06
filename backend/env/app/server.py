@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 import sqlite3
 import json
-from utils import json_to_packets_dict
+from utils import get_overall_traffic, json_to_time_data, distracting_sites_count, get_sourceip_packets
 app = Flask(__name__)
 
 def get_db_connection():
@@ -19,10 +19,9 @@ def submit_data():
     if not data:
         return jsonify({"error": "No data provided"}), 400
     else:
-        # Convert the list of JSON objects to a JSON string and then to bytes
-        json_data = json.dumps(data).encode('utf-8')
-        for data in json_data:
-             conn.execute('INSERT INTO traffic (data) VALUES (?)', (data))
+        # iterate over the list of JSON objects to a JSON string and then to bytes
+        for row in data:
+            conn.execute('INSERT INTO traffic (time, src_ip, destination_ip, destination_name) VALUES (?, ?, ?, ?) ', (row['time'], row['source_ip'], row['destination_ip'], ''))
 
         conn.commit()
 
@@ -30,24 +29,18 @@ def submit_data():
 
 @app.route('/activity', methods=['GET'])
 def get_activity():
-    conn = get_db_connection()
-    # Fetch the data back from the database
-    rows = conn.execute('SELECT * FROM traffic').fetchall()
-    # print(rows)
-    response = []
-    # Convert the stored BLOB back to a Python list of dictionaries
-    for row in rows:
-        stored_blob = row[1]  # Assuming 'data' is the second column
-        stored_json = stored_blob.decode('utf-8')  # Decode bytes back to string
-        stored_data = json.loads(stored_json)
+    
+    packets = get_overall_traffic()
+    result = json_to_time_data()
+    number = distracting_sites_count()
+    source_ip = get_sourceip_packets()
 
-        response.append(stored_data)
-
-    packets = json_to_packets_dict(response)
-    conn.close()
     # Return a JSON response
-    return {"Data" : packets}
+    return {"Data" : source_ip}
 
 @app.route('/')
 def hello():
     return 'Hello World!'
+
+if __name__ == '__main__':
+    app.run(debug=True, host='0.0.0.0', port=5000)
