@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 import sqlite3
 import json
-from utils import json_to_packets_dict
+from utils import json_to_packets_dict, remove_random_domains, json_to_time_data
 app = Flask(__name__)
 
 def get_db_connection():
@@ -43,7 +43,10 @@ def get_activity():
 
         response.append(stored_data)
 
-    packets = json_to_packets_dict(response)
+    clean_data = remove_random_domains(response)
+    packets = json_to_packets_dict(clean_data)
+
+    json_to_time_data(clean_data)
     conn.close()
     # Return a JSON response
     return {"Data" : packets}
