@@ -1,11 +1,9 @@
-import requests
-from scapy.all import sniff
-import json
-import time
-from collections import deque
 import ipaddress
-import socket
+import time
+import requests
+from collections import deque
 from datetime import datetime
+from scapy.all import sniff
 
 # URL of your Flask backend API
 API_URL = "http://127.0.0.1:5000/pcap"
