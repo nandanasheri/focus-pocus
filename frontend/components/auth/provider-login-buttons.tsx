@@ -52,10 +52,10 @@ export const ProviderLoginButtons: FC<Props> = ({ onSignIn }) => {
         disabled={isLoading}
         onClick={async () => {
           const provider = new GoogleAuthProvider();
-          toast({
-            title: "Oops!",
-            description: "Provider not configured, yet.",
-          });
+          // toast({
+          //   title: "Oops!",
+          //   description: "Provider not configured, yet.",
+          // });
           await doProviderSignIn(provider);
         }}
       >
