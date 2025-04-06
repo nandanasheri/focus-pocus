@@ -59,8 +59,8 @@ take last 10 minutes
 find top 3 most visited domains
 for each
 { time: "21:35", google.com: 385, chatgpt.com: 420 },
-  { date: "2024-05-05", desktop: 481, mobile: 390 },
-  { date: "2024-05-06", desktop: 498, mobile: 520 }
+ { time: "21:35", google.com: 385, chatgpt.com: 420 },
+ { time: "21:35", google.com: 385, chatgpt.com: 420 },
 '''
 def json_to_time_data():
     conn = get_db_connection()
@@ -81,10 +81,7 @@ def json_to_time_data():
         print(output)
 
     return output
-        
 
-    # for (destination_ip, count) in rows:
-    #     print(f"{destination_ip}: {count} occurrences")
 
     
     

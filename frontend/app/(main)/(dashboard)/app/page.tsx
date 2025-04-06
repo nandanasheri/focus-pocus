@@ -1,7 +1,9 @@
+"use client"
+
 import { PacketsBarChart } from "./packetsbarchart";
 import { PieChartAddIn } from "./pieChart";
 import { TopBarChart } from "./barChartIP";
-
+import React, { useEffect, useState } from "react";
 import {
   Card,
   CardHeader,
@@ -10,6 +12,38 @@ import {
 } from "@/components/ui/card";
 
 const ApplicationPage = () => {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  // Define an async function to fetch data
+  const fetchData = async () => {
+    try {
+      const response = await fetch('http://127.0.0.1:5000/activity', {
+        headers: {
+          'Cache-Control': 'no-cache', // Prevents caching of the response
+          'Pragma': 'no-cache',
+          'Expires': '0', // Ensures no cached data is used
+        },
+      });
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json(); // Parse the JSON data
+      console.log(data)
+      setData(data); // Update the state with the fetched data
+      setLoading(false); // Set loading to false
+    } catch (error) {
+      setLoading(false); // Set loading to false
+    }
+  };
+
+  useEffect(() => {
+    fetchData(); // Call the async fetch function when the component mounts
+    // Set an interval to call the API every 30 seconds
+    const intervalId = setInterval(fetchData, 30000); // 30000 ms = 30 seconds
+    return () => clearInterval(intervalId);
+  }, []); // Empty dependency array means this runs only once when the component mounts
+
   return (
     <>
       <div className="flex-col md:flex space-y-4" >
@@ -27,7 +61,7 @@ const ApplicationPage = () => {
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-3xl font-medium">
-                  Top site visited
+                  Top Domain
                 </CardTitle>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
