@@ -4,11 +4,37 @@ from collections import defaultdict
 
 import sqlite3
 
+DISTRACTORS = set([
+    "linkedin",
+    "tiktok",
+    "reddit",
+    "facebook",
+    "youtube",
+    "discord",
+    "snapchat",
+    "whatsapp",
+    "instagram",
+    "netflix",
+    "amazon",
+    "hbo",
+    "zara"
+])
+
 def get_db_connection():
     conn = sqlite3.connect('database.db')
     # This gives you name-bases access to columns in your database
     conn.row_factory = sqlite3.Row
     return conn
+
+def distracting_sites_count():
+    conn = get_db_connection()
+    rows = conn.execute("SELECT hostname FROM traffic").fetchall()
+    hostnames = [row[0] for row in rows]
+    distractor_packets = 0
+    for hostname in hostnames:
+          if any(distractor in hostname for distractor in DISTRACTORS):
+              distractor_packets += 1
+    return distractor_packets
 
 def get_overall_traffic() -> Any:
     conn = get_db_connection()
@@ -63,7 +89,7 @@ def json_to_time_data() -> Any:
             result[minute][top_domain_names[0]] = 0
             result[minute][top_domain_names[1]] = 0
             result[minute][top_domain_names[2]] = 0
-        for hostname, count in hosts.items():
+        for hostname, count in host.items():
             if hostname in top_domain_names:
                 result[minute][hostname] = count
     return result
