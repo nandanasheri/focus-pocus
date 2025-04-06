@@ -1,5 +1,6 @@
 import { PacketsBarChart } from "./packetsbarchart";
 import { PieChartAddIn } from "./pieChart";
+import { TopBarChart } from "./barChartIP";
 
 import {
   Card,
@@ -16,6 +17,9 @@ const ApplicationPage = () => {
           <h2 className="text-6xl leading-5 font-bold tracking-tight text-accentblue">
             Dashboard
           </h2>
+        </div>
+        <div>
+          <TopBarChart/>
         </div>
         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-8">
           <PieChartAddIn/>
@@ -45,7 +49,7 @@ const ApplicationPage = () => {
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-3xl font-medium">
-                  Num of distracting sites
+                  Percentage of distarcting websites visited
                 </CardTitle>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -60,7 +64,7 @@ const ApplicationPage = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-5xl font-bold">
-                  1 billion
+                  24.2%
                 </p>
               </CardContent>
             </Card>
