@@ -25,6 +25,7 @@
     "@radix-ui/react-toast": "^1.1.5",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
+    "date-fns": "^4.1.0",
     "encoding": "^0.1.13",
     "firebase": "^9.23.0",
     "lucide-react": "^0.284.0",
@@ -49,6 +50,6 @@
     "typescript": "latest"
   },
   "overrides": {
-  "react-is": "^19.0.0-rc-69d4b800-20241021"
-}
+    "react-is": "^19.0.0-rc-69d4b800-20241021"
+  }
 }
