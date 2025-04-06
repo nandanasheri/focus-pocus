@@ -19,10 +19,10 @@ def submit_data():
     if not data:
         return jsonify({"error": "No data provided"}), 400
     else:
-        # Convert the list of JSON objects to a JSON string and then to bytes
-        json_data = json.dumps(data).encode('utf-8')
-        for data in json_data:
-             conn.execute('INSERT INTO traffic (data) VALUES (?)', (data))
+        # iterate over the list of JSON objects to a JSON string and then to bytes
+        for each in data:
+            json_data = json.dumps(each).encode('utf-8')
+            conn.execute('INSERT INTO traffic (data) VALUES (?)', (json_data,))
 
         conn.commit()
 
@@ -51,3 +51,6 @@ def get_activity():
 @app.route('/')
 def hello():
     return 'Hello World!'
+
+if __name__ == '__main__':
+    app.run(debug=True, host='0.0.0.0', port=5000)
