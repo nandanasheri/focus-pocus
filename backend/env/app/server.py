@@ -20,9 +20,8 @@ def submit_data():
         return jsonify({"error": "No data provided"}), 400
     else:
         # iterate over the list of JSON objects to a JSON string and then to bytes
-        for each in data:
-            json_data = json.dumps(each).encode('utf-8')
-            conn.execute('INSERT INTO traffic (data) VALUES (?)', (json_data,))
+        for row in data:
+            conn.execute('INSERT INTO traffic (time, src_ip, hostname) VALUES (?, ?, ?) ', (row['time'], row['source_ip'], row['destination_hostname']))
 
         conn.commit()
 
