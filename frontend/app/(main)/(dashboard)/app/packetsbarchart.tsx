@@ -26,11 +26,10 @@ const chartColors = [
 ]
 
 export function PacketsBarChart({ chartData }: { chartData: Array<String> }) {
-
   const uniqueDomains = Array.from(new Set(chartData.map((data) => data.domain)))
   const maxDomains = uniqueDomains.slice(0, 5)
 
-  const transformedData = maxDomains.reduce((acc, domain) => {
+  const transformedData = maxDomains.sort((a, b) => b.time - a.time).reduce((acc, domain) => {
     chartData.filter((data) => data.domain === domain).forEach(({ time, visits }) => {
       const existingTimeData = acc.find((item) => item.time === time)
       if (existingTimeData) {

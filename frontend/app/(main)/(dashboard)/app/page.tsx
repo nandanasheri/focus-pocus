@@ -12,42 +12,39 @@ import {
 } from "@/components/ui/card";
 
 const ApplicationPage = () => {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
   const [traffic, setTraffic] = useState(null);  
   const [time, setTime] = useState([]);
+  const [topDomains, setTopDomains] = useState([])
+  const [distractors, setDistractors] = useState(0.0)
 
-
-  // Define an async function to fetch data
   const fetchData = async () => {
     try {
       const response = await fetch('http://127.0.0.1:5000/activity', {
         headers: {
-          'Cache-Control': 'no-cache', // Prevents caching of the response
+          'Cache-Control': 'no-cache', 
           'Pragma': 'no-cache',
-          'Expires': '0', // Ensures no cached data is used
+          'Expires': '0', 
         },
       });
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-      const data = await response.json(); // Parse the JSON data
-      console.log(data)
-      setData(data); // Update the state with the fetched data
-      setLoading(false); // Set loading to false
+
+      const data = await response.json(); 
+
       setTraffic(data["traffic"]);
+      setTopDomains(data['traffic'].sort((a, b) => b - a).slice(0,3))
+      setDistractors(data['number'])
       setTime(data['time'])
-    } catch (error) {
-      setLoading(false); // Set loading to false
-    }
+    } catch (error) {}
   };
 
   useEffect(() => {
-    fetchData(); // Call the async fetch function when the component mounts
-    // Set an interval to call the API every 30 seconds
-    const intervalId = setInterval(fetchData, 5000); // 30000 ms = 30 seconds
+    fetchData(); 
+    
+    const intervalId = setInterval(fetchData, 5000); 
     return () => clearInterval(intervalId);
-  }, []); // Empty dependency array means this runs only once when the component mounts
+  }, []); 
 
   return (
     <>
@@ -83,11 +80,13 @@ const ApplicationPage = () => {
                   className="h-20 w-4 text-muted-foreground"
                 />
               </CardHeader>
-              <CardContent>
-                <p className="text-5xl font-bold">
-                  Google
-                </p>
-              </CardContent>
+              {topDomains.map(([site, visits], index) => (
+                <CardContent key={index}>
+                  <p className="text-3xl font-bold">
+                    {index + 1}. {site}
+                  </p>
+                </CardContent>
+              ))}
             </Card>
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -107,7 +106,7 @@ const ApplicationPage = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-5xl font-bold">
-                  24.2%
+                  {distractors.toFixed(2)}%
                 </p>
               </CardContent>
             </Card>
