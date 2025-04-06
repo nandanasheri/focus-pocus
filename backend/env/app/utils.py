@@ -32,19 +32,31 @@ def distracting_sites_count():
     destination_names = [row[0] for row in rows]
     distractor_packets = 0
     for destination_name in destination_names:
-          if any(distractor in destination_name for distractor in DISTRACTORS):
+          if destination_name != '' and any(distractor in destination_name for distractor in DISTRACTORS):
               distractor_packets += 1
-    if len(destination_name):
-        return distractor_packets/len(destination_name) * 100
+    if len(rows):
+        return (distractor_packets/len(rows)) * 100
     return 0
 
 def get_overall_traffic() -> Any:
     conn = get_db_connection()
     rows = conn.execute("SELECT COUNT(id), destination_name from traffic GROUP BY destination_name ORDER BY COUNT(id) DESC").fetchall()
     packets_dict = []
+    domain_totals = defaultdict(int)
     for row in rows:
-        packets_dict.append((row[1], row[0]))
 
+        parts = row[1].split('.')
+        if len(parts) >= 2:
+            base_domain = '.'.join(parts[-2:])
+            domain_totals[base_domain] += row[0]
+    
+    sorted_domains = sorted(domain_totals.items(), key=lambda item: item[1], reverse=True)
+    
+    for domain, count in sorted_domains:
+        packets_dict.append((domain, count))
+    
+    print(packets_dict)
+    
     return packets_dict
 
 def get_sourceip_packets() -> Any:
