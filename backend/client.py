@@ -62,7 +62,7 @@ def process_packet(packet):
         packet_info = {
             'time': formatted_timestamp,
             'source_ip': source_ip,
-            'destination_hostname': destination_ip,
+            'destination_ip': destination_ip,
         }
         
         # Add the packet info to the batch
