@@ -55,7 +55,7 @@ const ApplicationPage = () => {
           </h2>
         </div>
         <div>
-          <TopBarChart/>
+          <TopBarChart chartData={sources}/>
         </div>
         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-8">
         {traffic ? (

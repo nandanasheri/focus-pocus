@@ -36,11 +36,11 @@ def get_activity():
     
     packets = get_overall_traffic()
     time = json_to_time_data()
-    # number, alerts = distracting_sites_count()
+    number, alerts = distracting_sites_count()
     source_ip = get_sourceip_packets()
 
     # Return a JSON response
-    return {"traffic" : packets, "sources" : source_ip, "time" : time}
+    return {"traffic" : packets, "sources" : source_ip, "time" : time, "number": number, "alerts": alerts}
 
 @app.route('/')
 def hello():
