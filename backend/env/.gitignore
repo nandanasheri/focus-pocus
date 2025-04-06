@@ -3,3 +3,4 @@ Scripts
 *.pyc
 *.db
 _pycache_
+scapy.1

@@ -34,7 +34,9 @@ def distracting_sites_count():
     for destination_name in destination_names:
           if any(distractor in destination_name for distractor in DISTRACTORS):
               distractor_packets += 1
-    return distractor_packets
+    if len(destination_name):
+        return distractor_packets/len(destination_name) * 100
+    return 0
 
 def get_overall_traffic() -> Any:
     conn = get_db_connection()
@@ -45,6 +47,13 @@ def get_overall_traffic() -> Any:
 
     return packets_dict
 
+def get_sourceip_packets() -> Any:
+    conn = get_db_connection()
+    rows = conn.execute("SELECT src_ip, COUNT(id) from traffic GROUP BY src_ip")
+    src_data = []
+    for row in rows:
+        src_data.append((row[0], row[1]))
+    return src_data
 '''
 take last 10 minutes
 find top 3 most visited domains

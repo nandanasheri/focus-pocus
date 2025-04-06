@@ -23,7 +23,6 @@ const formSchema = z.object({
 })
 
 export function ProfileForm() {
-  // ...
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
   });

@@ -1,8 +1,12 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import sqlite3
 import json
-from utils import get_overall_traffic, json_to_time_data, distracting_sites_count
+from utils import get_overall_traffic, json_to_time_data, distracting_sites_count, get_sourceip_packets
 app = Flask(__name__)
+
+# To allow CORS from our frontend .
+CORS(app)
 
 def get_db_connection():
     conn = sqlite3.connect('database.db')
@@ -31,10 +35,12 @@ def submit_data():
 def get_activity():
     
     packets = get_overall_traffic()
-    result = json_to_time_data()
+    # result = json_to_time_data()
     number = distracting_sites_count()
+    source_ip = get_sourceip_packets()
+
     # Return a JSON response
-    return {"Data" : number}
+    return {"Traffic" : packets, "distractors" : number, "sources" : source_ip}
 
 @app.route('/')
 def hello():

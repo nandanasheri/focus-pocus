@@ -13,18 +13,13 @@ export const NavBar: FC = () => {
           <div className="flex items-center">
             <Link href="/" className="hover:opacity-80 transition-opacity">
               <div className="flex items-center">
-                {/* INSERT LOGO HERE */}
                 <span className="text-xl font-semibold tracking-tighter text-slate-800 mr-6">
                   lock0ut
                 </span>
               </div>
             </Link>
             <div className="hidden md:flex justify-between grow">
-              <div>
-                <Link href="#1" className={buttonVariants({ variant: "link" })}>
-                  Loserboard
-                </Link>
-              </div>
+              <div></div>
               <div className="flex items-center space-x-4">
                 <NavbarUserLinks />
               </div>

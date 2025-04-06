@@ -2,6 +2,12 @@ import sqlite3
 import socket
 import time
 
+def isvalid_domain(domain):
+    RANDOM_DOMAINS = set(['.net', 'aws', 'static', 'cloudflare'])
+    if any(domain in each for each in RANDOM_DOMAINS):
+        return True
+    return False
+
 def get_top_destination_ips_with_empty_destination_name():
     conn = sqlite3.connect('database.db')
     cursor = conn.cursor()
@@ -53,9 +59,10 @@ def main():
         for destination_ip in top_destination_ips:
             destination_name = reverse_dns_lookup(destination_ip)
             if destination_name:
-                print(f"Updating {destination_ip} to {destination_name}")
-                update_destination_name(destination_ip, destination_name)
-            else:
+                if isvalid_domain(destination_name):
+                    print(f"Updating {destination_ip} to {destination_name}")
+                    update_destination_name(destination_ip, destination_name)
+            elif not destination_name or not isvalid_domain(destination_name):
                 # If reverse DNS lookup fails, delete the entry
                 print(f"Could not resolve {destination_ip}. Deleting entry.")
                 delete_entry(destination_ip)
