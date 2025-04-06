@@ -53,14 +53,14 @@ def process_packet(packet):
     source_ip = packet[1].src
     destination_ip = packet[1].dst
     dt_object = datetime.fromtimestamp(packet.time)
-    formatted_timestamp = dt_object.strftime('%Y-%m-%dT%H:%M:%S.') + f"{dt_object.microsecond:06d}"
+    # formatted_timestamp = dt_object.strftime('%Y-%m-%dT%H:%M:%S.') + f"{:06d}"
 
     if not is_private_ip(destination_ip):
         # Perform reverse DNS lookup for destination IP
         
         # Collect packet info
         packet_info = {
-            'time': formatted_timestamp,
+            'time': packet.time,
             'source_ip': source_ip,
             'destination_ip': destination_ip,
         }
