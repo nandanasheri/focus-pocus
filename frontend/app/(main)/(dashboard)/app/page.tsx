@@ -35,7 +35,7 @@ const ApplicationPage = () => {
       console.log(data)
       setData(data); // Update the state with the fetched data
       setLoading(false); // Set loading to false
-      setTraffic(data["Traffic"]);
+      setTraffic(data["traffic"]);
       setTime(data['time'])
     } catch (error) {
       setLoading(false); // Set loading to false
