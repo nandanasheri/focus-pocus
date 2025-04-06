@@ -29,14 +29,19 @@ def get_db_connection():
 def distracting_sites_count():
     conn = get_db_connection()
     rows = conn.execute("SELECT destination_name FROM traffic").fetchall()
+    alerts = set()
     destination_names = [row[0] for row in rows]
     distractor_packets = 0
     for destination_name in destination_names:
           if destination_name != '' and any(distractor in destination_name for distractor in DISTRACTORS):
               distractor_packets += 1
+              alerts.add(destination_name)
+    alerts_list = []
+    for each in alerts:
+        alerts_list.append(each)
     if len(rows):
-        return (distractor_packets/len(rows)) * 100
-    return 0
+        return (distractor_packets/len(rows)) * 100, alerts_list
+    return 0, alerts
 
 def get_overall_traffic() -> Any:
     conn = get_db_connection()
