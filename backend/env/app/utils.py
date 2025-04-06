@@ -69,7 +69,7 @@ def get_sourceip_packets() -> Any:
     rows = conn.execute("SELECT src_ip, COUNT(id) from traffic GROUP BY src_ip")
     src_data = []
     for row in rows:
-        src_data.append((row[0], row[1]))
+        src_data.append({"month": row[0], "desktop": row[1]})
     return src_data
 '''
 take last 10 minutes

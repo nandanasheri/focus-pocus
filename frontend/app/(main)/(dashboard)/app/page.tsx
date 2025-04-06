@@ -16,6 +16,7 @@ const ApplicationPage = () => {
   const [loading, setLoading] = useState(true);
   const [traffic, setTraffic] = useState(null);  
   const [time, setTime] = useState([]);
+  const [sources, setSources] = useState([])
 
 
   // Define an async function to fetch data
@@ -37,6 +38,7 @@ const ApplicationPage = () => {
       setLoading(false); // Set loading to false
       setTraffic(data["traffic"]);
       setTime(data['time'])
+      setSources(data['sources'])
     } catch (error) {
       setLoading(false); // Set loading to false
     }
@@ -58,7 +60,7 @@ const ApplicationPage = () => {
           </h2>
         </div>
         <div>
-          <TopBarChart/>
+          <TopBarChart chartData={sources}/>
         </div>
         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-8">
         {traffic ? (
