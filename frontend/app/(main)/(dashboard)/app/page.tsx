@@ -1,19 +1,21 @@
-// "use client"
+
 
 import { DemoDashboard } from "@/components/demo-dashboard/demo-dashboard";
+
+import { PieChartAddIn } from "./pieChart";
+
+import { TableEx } from "./tableEx";
 import {
   Card,
   CardHeader,
   CardTitle,
   CardContent,
   CardDescription,
+  CardFooter,
 } from "@/components/ui/card";
-// import {
-//   ChartConfig,
-//   ChartContainer,
-//   ChartTooltip,
-//   ChartTooltipContent,
-// } from "@/components/ui/chart"
+
+
+
 import {
   Table,
   TableBody,
@@ -25,29 +27,9 @@ import {
   TableRow,
 } from "@/components/ui/table"
 
-const recentActivity = [
-  {
-    numId: "1",
-    appName: "A1",
-    hours: 3,
-  },
-  {
-    numId: "2",
-    appName: "B2",
-    hours: 6,
-  },
-  {
-    numId: "3",
-    appName: "C3",
-    hours: 9,
-  },
-  {
-    numId: "4",
-    appName: "D4",
-    hours: 12,
-  },
 
-]
+
+
 
 const ApplicationPage = () => {
   return (
@@ -58,60 +40,10 @@ const ApplicationPage = () => {
             Dashboard
           </h2>
         </div>
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-8">
-        <Card className="col-span-4">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">
-              Recent Activity
-            </CardTitle>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                className="h-4 w-4 text-muted-foreground"
-              />
-              </CardHeader>
-              <CardContent>
-                <Table>
-                  <TableBody>
-                    {recentActivity.map((numId) => (
-                    <TableRow key={numId.numId}>
-                      <TableCell className="font-medium">{numId.numId}</TableCell>
-                      <TableCell>{numId.appName}</TableCell>
-                      <TableCell>{numId.hours}</TableCell>
-                    </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </CardContent>
-          </Card>
-          <Card className="col-span-4">
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">
-                    Total sites visited
-                  </CardTitle>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    className="h-4 w-4 text-muted-foreground"
-                  />
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">example num</div>
-                </CardContent>
-              </Card>
-              </div>
-              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-              <Card className="flex flex-col justify-between col-span-3 bg-accentpinkish">
+      <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-8">
+        <PieChartAddIn/>
+        <div className="flex-col  space-y-6 col-span-4 ">
+        <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-3xl font-medium">
                     Top site visited
@@ -124,45 +56,41 @@ const ApplicationPage = () => {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth="2"
-                    className="h-4 w-4 text-muted-foreground"
+                    className="h-20 w-4 text-muted-foreground"
                   />
                 </CardHeader>
                 <CardContent>
                 <p className="text-5xl font-bold">
-                example num
+                Google
                   </p>
                 </CardContent>
               </Card>
-              <Card className="col-span-4">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">
-              Recent Activity
-            </CardTitle>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                className="h-4 w-4 text-muted-foreground"
-              />
-              </CardHeader>
-              <CardContent>
-                <Table>
-                  <TableBody>
-                    {recentActivity.map((numId) => (
-                    <TableRow key={numId.numId}>
-                      <TableCell className="font-medium">{numId.numId}</TableCell>
-                      <TableCell>{numId.appName}</TableCell>
-                      <TableCell>{numId.hours}</TableCell>
-                    </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </CardContent>
-          </Card>
+              <Card className=" bg-accentpinkish">
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle className="text-3xl font-medium">
+                    Num of distracting sites
+                  </CardTitle>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    className="h-20 w-4 text-muted-foreground"
+                  />
+                </CardHeader>
+                <CardContent>
+                <p className="text-5xl font-bold">
+                1 billion
+                  </p>
+                </CardContent>
+              </Card>
+        </div>
+        
+      </div>
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
         </div>
       </div>
     </>
