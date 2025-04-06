@@ -19,6 +19,7 @@ module.exports = {
       colors: {
         primarywhite: '#FBFBFF',
         accentviolet: '#4B3F72',
+        accentpinkish: '#9D8189',
         accentblue: '#119DA4',
         darkgreen: "#19647E",
         border: "hsl(var(--border))",
