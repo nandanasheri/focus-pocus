@@ -1,8 +1,12 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import sqlite3
 import json
 from utils import get_overall_traffic, json_to_time_data, distracting_sites_count, get_sourceip_packets
 app = Flask(__name__)
+
+# To allow CORS from our frontend .
+CORS(app)
 
 def get_db_connection():
     conn = sqlite3.connect('database.db')
