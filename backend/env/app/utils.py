@@ -34,7 +34,9 @@ def distracting_sites_count():
     for hostname in hostnames:
           if any(distractor in hostname for distractor in DISTRACTORS):
               distractor_packets += 1
-    return distractor_packets/len(hostnames) * 100
+    if len(hostnames):
+        return distractor_packets/len(hostnames) * 100
+    return 0
 
 def get_overall_traffic() -> Any:
     conn = get_db_connection()

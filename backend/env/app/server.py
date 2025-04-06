@@ -31,12 +31,12 @@ def submit_data():
 def get_activity():
     
     packets = get_overall_traffic()
-    result = json_to_time_data()
+    # result = json_to_time_data()
     number = distracting_sites_count()
     source_ip = get_sourceip_packets()
 
     # Return a JSON response
-    return {"Data" : source_ip}
+    return {"Traffic" : packets, "distractors" : number, "sources" : source_ip}
 
 @app.route('/')
 def hello():
