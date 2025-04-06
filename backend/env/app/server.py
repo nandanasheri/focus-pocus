@@ -21,7 +21,7 @@ def submit_data():
     else:
         # iterate over the list of JSON objects to a JSON string and then to bytes
         for row in data:
-            conn.execute('INSERT INTO traffic (time, src_ip, hostname) VALUES (?, ?, ?) ', (row['time'], row['source_ip'], row['destination_hostname']))
+            conn.execute('INSERT INTO traffic (time, src_ip, destination_ip, destination_name) VALUES (?, ?, ?, ?) ', (row['time'], row['source_ip'], row['destination_ip'], ''))
 
         conn.commit()
 

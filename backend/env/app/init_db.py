@@ -8,7 +8,8 @@ cursor.execute('''CREATE TABLE IF NOT EXISTS traffic (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     time DATETIME,
                     src_ip VARCHAR(50),
-                    hostname VARCHAR(100))''')
+                    destination_ip VARCHAR(50),
+                    destination_name VARCHAR(100))''')
 
 file_path = 'output.json'
 
@@ -17,7 +18,7 @@ with open(file_path, 'r') as file:
     data = json.load(file)
 
 for row in data:
-    conn.execute('INSERT INTO traffic (time, src_ip, hostname) VALUES (?, ?, ?) ', (row['time'], row['source_ip'], row['destination_hostname']))
+    conn.execute('INSERT INTO traffic (time, src_ip, destination_ip, destination_name) VALUES (?, ?, ?, ?) ', (row['time'], row['source_ip'], row['destination_ip'], ''))
 
 conn.commit() 
 
