@@ -10,3 +10,4 @@ def json_to_packets_dict(json_data: str) -> Any:
             packets_dict[packet["destination_hostname"]] += 1
 
     return packets_dict
+
